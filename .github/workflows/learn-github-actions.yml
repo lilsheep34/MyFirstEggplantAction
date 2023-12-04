@@ -1,13 +1,13 @@
 name: learn-github-actions                                  # optional - name of workflow
 run-name: ${{ github.actor }} is learning GitHub Actions    # optional - name of workflow run generated from the workflow
-on: [push]                                                  # specifies trigger for this workflow (use "push" event)
-jobs:                                                       # groups together all the jobs that run in this workflow
-  check-bats-version:                                       # define job named "check-bats-version", child keys will define properties of job
-    runs-on: ubuntu-latest                                  # configure the job to run on latest version of an Ubuntu Linux runner
-    steps:                                                  # groups together all steps that run in "check-bats-version" job
-      - uses: actions/checkout@v4                           # "uses" keyword specifies that this step will run v4 of the "actions/checkout" action
-      - uses: actions/setup-node@v3                         # this step uses "action/setup-node@v3" action to install specified version of Node.js
+on: [push]                                                  # EVENT  : specifies trigger for this workflow (use "push" event)
+jobs:                                                       #          groups together all the jobs that run in this workflow
+  check-bats-version:                                       #          define job named "check-bats-version", child keys will define properties of job
+    runs-on: ubuntu-latest                                  # RUNNER : configure the job to run on latest version of an Ubuntu Linux runner
+    steps:                                                  # JOB    : groups together all steps that run in "check-bats-version" job
+      - uses: actions/checkout@v4                           # STEP1 (CHECK OUT REPOSITORY) : "uses" keyword specifies that this step will run v4 of the "actions/checkout" action
+      - uses: actions/setup-node@v3                         # STEP2 (INSTALL NODE.JS)      : this step uses "action/setup-node@v3" action to install specified version of Node.js
         with:
           node-version: '14'
-      - run: npm install -g bats                            # "run" keyword tells the job to execute a command on runner
-      - run: bats -v                                        # run "bats" command with a parameter that outputs the software version
+      - run: npm install -g bats                            # STEP3 (INSTALL BATS)         : "run" keyword tells the job to execute a command on runner
+      - run: bats -v                                        # STEP4 (RUN BATS)             : run "bats" command with a parameter that outputs the software version
